@@ -1,12 +1,14 @@
 import Carousel from 'react-bootstrap/Carousel';
-
+import img1 from "../../assets/img/carousel.jpg"
+import img2 from "../../assets/img/carousel3.jpg"
+import img3 from "../../assets/img/scrol.jpg"
 export function HomCarousel() {
   return (
     <Carousel>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="holder.js/800x400?text=First slide&bg=373940"
+          src={img1}
           alt="First slide"
         />
         <Carousel.Caption>
@@ -17,7 +19,7 @@ export function HomCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="holder.js/800x400?text=Second slide&bg=282c34"
+          src={img2}
           alt="Second slide"
         />
 
@@ -29,7 +31,7 @@ export function HomCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="holder.js/800x400?text=Third slide&bg=20232a"
+          src={img3}
           alt="Third slide"
         />
 
