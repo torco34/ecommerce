@@ -1,13 +1,18 @@
 const db = require('../DB/mysql');
 
-const respuesta = require('../red/respusta');
-const TABLE = "productos"
-function oll() {
-    return db.oll(TABLE)
+async function getAllClientes(req, res) {
+    try {
+        const clientes = await db.oll('clientes');
+        res.status(200).json({
+            success: true,
+            data: clientes
+        });
+    } catch (error) {
+        console.error('❌ Error al obtener clientes:', error);
+        res.status(500).json({ success: false, error: 'Error en el servidor' });
+    }
 }
+
 module.exports = {
-    oll,
-    one: (id) => db.one(TABLE, id),
-    add: (data) => db.add(TABLE, data),
-    remove: (id) => db.remove(TABLE, id)
-}
+    getAllClientes
+};
