@@ -5,9 +5,9 @@ const app = express();
 app.use(express.json());
 
 // Importar rutas
-const clientesRoutes = require('./models/router');
+const clientesRoutes = require('./models/router'); // o controllers/routes según cómo lo organizaste
 
 // Usar rutas
-app.use('/api/clientes', clientesRoutes);
+app.use('/api/productos', clientesRoutes);
 
 module.exports = app;

@@ -1,6 +1,5 @@
 const mysql = require('mysql2');
-
-const config = require('../config/env'); // Aquí tomas los datos del .env
+const config = require('../config/env');
 
 const dbConfig = {
     host: config.mysql.host,
@@ -11,20 +10,29 @@ const dbConfig = {
 
 let connection;
 
-function conMysql() {
+function conMysql(retries = 5, delay = 5000) {
     connection = mysql.createConnection(dbConfig);
 
     connection.connect((err) => {
         if (err) {
-            console.error('❌ Error al conectar a MySQL:', err);
-            return;
+        console.error(`❌ Error al conectar a MySQL: ${err.code}`);
+
+        if (retries > 0) {
+            console.log(`🔁 Reintentando en ${delay / 1000} segundos... (${retries} intentos restantes)`);
+            setTimeout(() => conMysql(retries - 1, delay), delay);
+        } else {
+            console.error('❌ No se pudo conectar a MySQL después de varios intentos.');
+            process.exit(1); // Termina la app si ya no hay intentos
         }
-        console.log('✅ Conectado a MySQL');
-    });
+
+        return;
+    }
+
+      console.log('✅ Conectado a MySQL');
+  });
 
     return connection;
 }
-
 
 conMysql();
 

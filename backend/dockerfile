@@ -1,0 +1,18 @@
+# Imagen base de Node.js
+FROM node:18
+
+# Crear carpeta de trabajo
+WORKDIR /app
+
+# Copiar archivos
+COPY package*.json ./
+RUN npm install
+
+# Copiar el resto de la app
+COPY . .
+
+# Exponer puerto (el que usas en tu .env, por ejemplo 4000)
+EXPOSE 4000
+
+# Comando para iniciar
+CMD ["npm", "run", "dev"]
